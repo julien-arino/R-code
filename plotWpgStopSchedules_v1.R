@@ -67,10 +67,10 @@ monster_frame$y = OpenStreetMap::projectMercator(monster_frame$stop_lat,
                                                  monster_frame$stop_lon)[,2]
 
 # Download map for plotting
-Winnipeg_upperLeft = c(max(monster_frame$stop_lat)+0.01, 
-                       min(monster_frame$stop_lon)-0.01)
-Winnipeg_lowerRight = c(min(monster_frame$stop_lat)-0.01, 
-                        max(monster_frame$stop_lon)+0.01)
+Winnipeg_upperLeft = c(max(monster_frame$stop_lat), 
+                       min(monster_frame$stop_lon))
+Winnipeg_lowerRight = c(min(monster_frame$stop_lat), 
+                        max(monster_frame$stop_lon))
 Winnipeg_map <- OpenStreetMap::openmap(upperLeft = Winnipeg_upperLeft,
                                        lowerRight = Winnipeg_lowerRight,
                                        type = "osm-public-transport")
@@ -107,7 +107,7 @@ for (i in 1:length(monster_frame$arrival_time)) {
     # Just to know where we are currently as it takes a while
     print(date_time)
     # Set up the plot
-    png(plotName)
+    png(plotName, width = 600, height = 600)
     plot(Winnipeg_map)
     title(main = sprintf("%s",date_time))
     # Update current time/date
